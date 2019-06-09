@@ -7,8 +7,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   password: { type: String, required: true },
   registrationNumber: { type: String, required: true, unique: true },
-  wallet: { type: Number, default: 0.0 },
-  deleted: { type: Boolean, default: false },
+  wallet: { type: Number, default: 0 },
 }, { timestamps: true, versionKey: false });
 
 userSchema.set('toJSON', { virtuals: true });

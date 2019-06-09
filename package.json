@@ -27,8 +27,7 @@
     "mongodb": "^3.2.7",
     "mongoose": "^5.5.14",
     "morgan": "^1.9.1",
-    "uuid": "^3.3.2",
-    "run-rs":"^0.5.2"
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

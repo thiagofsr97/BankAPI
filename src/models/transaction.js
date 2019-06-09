@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const transactionSchema = new mongoose.Schema({
   user: {
     type: mongoose.SchemaTypes.ObjectId,
+    ref: 'User',
     required: true,
   },
   action: {
@@ -10,22 +11,18 @@ const transactionSchema = new mongoose.Schema({
     required: true,
     enum: ['withdraw', 'deposit'],
   },
-  previousBalance: {
+  currentBalance: {
     type: Number,
     required: true,
   },
-  postBalance: {
+  ammountTransact: {
     type: Number,
-    required: true,
-  },
-  success: {
-    type: Boolean,
     required: true,
   },
 }, { timestamps: true, versionKey: false });
 
 transactionSchema.set('toJSON', { virtuals: true });
 
-const Transaction = mongoose.Model('Transaction', transactionSchema);
+const Transaction = mongoose.model('Transaction', transactionSchema);
 
 export default Transaction;

@@ -8,9 +8,9 @@ import { Error as errMongo } from 'mongoose';
 import User from '../models/user';
 import { signIn } from '../helpers/jwtAuth';
 
-const getToken = (user, id) => {
+const getToken = (userName, id) => {
   const payload = {
-    user,
+    userName,
     id,
   };
   return signIn(payload);
@@ -25,24 +25,27 @@ const create = async function (req, res, next) {
   try {
     const result = {};
     const {
-      name, password, registrationNumber,
+      name, password, registrationNumber, initialWallet,
     } = req.body;
     if (await User.findOne({ registrationNumber })) {
       return next(createError(403, `Registration Number ${registrationNumber} has already been taken.`));
     }
 
+    console.log(initialWallet);
     const user = new User({
       name,
       password,
       registrationNumber,
+      ...(initialWallet && { wallet: initialWallet }),
     });
 
-    const userCreated = Object.assign({}, await user.save());
-    delete userCreated.password;
+    const userCreated = await user.save();
     const token = getToken(userCreated.name, userCreated._id);
 
+    const userReturn = Object.assign({}, userCreated._doc);
+    delete userReturn.password;
     result.token = token;
-    result.result = userCreated;
+    result.result = userReturn;
     result.message = 'User has been successfully created and logged in.';
     res.status(200).send(result);
   } catch (err) {
@@ -96,7 +99,7 @@ const getAll = async function (req, res, next) {
 
 const getById = async function (req, res, next) {
   try {
-    const { id } = req.params;
+    const { id } = req.decoded;
     const result = {};
     const user = await User.findById(id).select('-password').exec();
     if (user) {
@@ -114,6 +117,24 @@ const getById = async function (req, res, next) {
   }
 };
 
+const getWallet = async function (req, res, next) {
+  try {
+    const result = {};
+    const { id } = req.decoded;
+
+    const userWallet = await User.findById(id).select('wallet').exec();
+    result.message = 'User wallet has been successfully found.';
+    result.wallet = userWallet;
+
+    res.status(200).send(result);
+  } catch (err) {
+    if (err instanceof errMongo.CastError) {
+      return next(createError(404, 'User not found \'cause id is not processable.'));
+    }
+    next(err);
+  }
+};
+
 export {
-  create, authenticate, getAll, getById,
+  create, authenticate, getAll, getById, getWallet,
 };
