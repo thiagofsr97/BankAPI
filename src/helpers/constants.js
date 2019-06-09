@@ -1,0 +1,1 @@
+export const ERROR_MISSING = 'Parameter is missing. Please make sure it is sent';
