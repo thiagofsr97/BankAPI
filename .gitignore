@@ -4,3 +4,5 @@ node_modules/
 #Build
 dist/
 
+#VS Code
+.vscode/

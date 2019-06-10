@@ -1,16 +1,13 @@
 {
-  "name": "Bank",
+  "name": "bank-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "A short and simple Bank Api Service.",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env DEBUG=bank:* NODE_ENV=production babel-node src/bin/index",
-    "dev": "cross-env nodemon --exec DEBUG=bank:* NODE_ENV=dev babel-node src/bin/index",
-    "build": "cross-env DEBUG=bank:* NODE_ENV=dev babel src --out-dir dist --copy-files --include-dotfiles --reset-cache",
-    "serve": "cross-env node dist/bin/index.js "
+    "dev": "cross-env nodemon --exec DEBUG=bank:* NODE_ENV=dev babel-node src/bin/index"
   },
   "keywords": [],
-  "author": "",
+  "author": "Thiago Filipe",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.6",
@@ -27,6 +24,7 @@
     "mongodb": "^3.2.7",
     "mongoose": "^5.5.14",
     "morgan": "^1.9.1",
+    "swagger-ui-express": "^4.0.6",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
@@ -37,10 +35,6 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/runtime": "^7.4.5",
     "cross-env": "^5.2.0",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.3",
     "nodemon": "^1.19.1"
   }
 }

@@ -1,6 +1,11 @@
 export const ERROR_ACTION_VALUES = 'Parameter must be either \'withdraw\' or \'deposit\' string value.';
 export const ERROR_MISSING = 'Parameter is missing. Please make sure it is sent';
 export const ERROR_FLOAT_VALUE = 'Parameter must be a float value.';
+export const ERROR_ABSOLUTE_VALUE = 'Value must be absolute.';
+export const ERROR_DATE_FORMAT = 'Parameter is not following the format YYYY-MM-DD.';
+export const ERROR_MIN_LENGTH = 'Parameter requires at least 8 alphanumeric characters';
+export const ERROR_VALID_REG = 'Parameter does not contain a valid Registration Number.';
 export const ACTION_DEPOSIT = 'deposit';
 export const ACTION_WITHDRAW = 'withdraw';
-
+export const DATE_FORMAT = 'YYYY-MM-DD';
+export const REG_NUMBER_REGEX = new RegExp(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/);
